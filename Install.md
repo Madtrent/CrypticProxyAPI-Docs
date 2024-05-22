@@ -33,7 +33,7 @@ Follow these steps to install and configure CrypticProxyAPI on your Minecraft pr
        ```
 
 5. **Generate an Access Key**
-   - **Run the Bot** by starting your proxy server with the CrypticProxyAPI plugin installed.
+   - **Run the API** by starting your proxy server with the CrypticProxyAPI plugin installed.
    - **Generate an Access Key**:
      - Open your proxy server console and run the following command:
        ```
