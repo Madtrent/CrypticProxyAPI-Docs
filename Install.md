@@ -1,3 +1,7 @@
+Sure, here's the updated guide with a section explaining the `FloodgatePrefix`.
+
+---
+
 ## How to Install CrypticProxyAPI
 
 Follow these steps to install and configure CrypticProxyAPI on your Minecraft proxy server:
@@ -37,9 +41,9 @@ Follow these steps to install and configure CrypticProxyAPI on your Minecraft pr
    - **Generate an Access Key**:
      - Open your proxy server console and run the following command:
        ```
-       capigenaccesskey
+       capi keygen
        ```
-     - The console will generate a new access key. Note the generated key and update the `key` section in the configuration file:
+     - The console will generate a new access key and update the configuration file:
        ```yaml
        AccessKey:
          key: 2910294e-eee7-490e-9264-eb07fbd78519
@@ -57,17 +61,40 @@ Here is an example of what your `config.yml` might look like after configuration
 port: 1234
 domain: 0.0.0.0
 limit: 100
+FloodgatePrefix: ''
 AccessKey:
   enabled: true
   key: 2910294e-eee7-490e-9264-eb07fbd78519
 ```
+
+### FloodgatePrefix Configuration
+
+`FloodgatePrefix` is a configuration setting used to specify a prefix for players connecting through GeyserMC, a tool that enables Bedrock Edition players to join Java Edition servers. Setting this prefix helps in distinguishing between Java and Bedrock players.
+
+The prefix configured here needs to match the prefix set in your Floodgate configuration. This allows the API to correctly distinguish between different player UUIDs and ensure proper identification of Bedrock players.
+
+**Example Usage:**
+- If in your floodgate config you have bedrock player to have a prefix like `BR-` you would set the `FloodgatePrefix` as follows:
+  ```yaml
+  FloodgatePrefix: 'BR-'
+  ```
+- If your server does not have bedrock support this is not needed
+  ```yaml
+  FloodgatePrefix: ''
+  ```
+  **Note:** Make sure the prefix you set in the `FloodgatePrefix` configuration of CrypticProxyAPI matches exactly with the prefix configured in your Floodgate plugin.
+
+This setting helps server administrators manage and identify Bedrock players more easily, ensuring a seamless experience for both Java and Bedrock users.
 
 ### Quick Recap
 
 1. **Drag and drop** the plugin into your proxy server's plugins folder.
 2. **Open a port** on your proxy server and define it in the config.
 3. **Link your domain/IP** to the port and set it in the config.
-4. **Enable the access key** if needed and generate a new key using `capigenaccesskey`.
-5. **Save and restart** your proxy server.
+4. **Enable the access key** if needed and generate a new key using `capi keygen`.
+5. **Set the `FloodgatePrefix`** if needed.
+6. **Save and restart** your proxy server.
 
 By following these steps, you will have CrypticProxyAPI installed and running on your Minecraft proxy server, ready to manage and retrieve player data securely and efficiently.
+
+---
