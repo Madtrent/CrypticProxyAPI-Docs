@@ -1,4 +1,4 @@
-# CrypticProxyAPI Documentation
+# CrypticProxyAPI Documentation v1.0.0-beta2
 
 ## Overview
 
@@ -18,7 +18,8 @@ The CrypticProxyAPI is a RESTful API designed to manage and retrieve player data
 - **Response**:
 ```json
 {
-  "status": "Server is running"
+  "status": "CrypticProxyDataAPI is running!"
+  "version": "<Api version> (String)"
 }
 ```
 
@@ -31,16 +32,16 @@ The CrypticProxyAPI is a RESTful API designed to manage and retrieve player data
   - **If the player has a data file**:
   ```json
   {
-    "LastLogout": Long,
+    "LastLogout": long,
     "Uuid": "String",
     "JoinedServers": {
       "Server1": {
-        "LastLogout": Long,
-        "Amount": Int
+        "LastLogout": long,
+        "Amount": int
       },
       "Server2": {
-        "LastLogout": Long,
-        "Amount": Int
+        "LastLogout": long,
+        "Amount": int
       }
     },
     "Server": "String/null",
@@ -50,7 +51,7 @@ The CrypticProxyAPI is a RESTful API designed to manage and retrieve player data
     ],
     "Connected": boolean,
     "LastLogoutServer": "String",
-    "JoinedBefore": Boolean,
+    "JoinedBefore": boolean,
     "FavoriteServer": "String"
   }
   ```
@@ -58,11 +59,8 @@ The CrypticProxyAPI is a RESTful API designed to manage and retrieve player data
   ```json
   {
     "Uuid": "String",
-    "Server": null,
     "Username": "String",
-    "Connected": Boolean,
-    "JoinedBefore": Boolean,
-    "FavoriteServer": ""
+    "JoinedBefore": boolean,
   }
   ```
 
@@ -73,11 +71,11 @@ The CrypticProxyAPI is a RESTful API designed to manage and retrieve player data
 ```json
 {
   "server1": {
-    "playerCount": Int,
+    "playerCount": int,
     "online": boolean
   },
   "server2": {
-    "playerCount": Int,
+    "playerCount": int,
     "online": boolean
   }
 }
@@ -108,10 +106,28 @@ The CrypticProxyAPI is a RESTful API designed to manage and retrieve player data
   "Uuid": "String",
   "Username": "String",
   "ServerName": "String",
-  "JoinAmount": Int,
-  "LastSeen": Long
+  "JoinAmount": int,
+  "LastSeen": long
 }
 ```
+
+## Errors
+
+### Error Responses
+- **General Error**:
+```json
+{
+  "error": "description"
+}
+```
+
+Errors are returned with an appropriate HTTP status code and a description of the error encountered.
+
+### Common Errors
+- **400 Bad Request**: The server could not understand the request due to invalid syntax or missing required parameters.
+- **404 Not Found**: The requested resource could not be found.
+- **401 Unauthorized**: Access key is missing or invalid.
+- **500 Internal Server Error**: An unexpected error occurred on the server.
 
 ## Configuration
 Configuration options for the CrypticProxyAPI are specified in the config file:
@@ -120,6 +136,7 @@ Configuration options for the CrypticProxyAPI are specified in the config file:
 port: <port you want the server to run on>
 domain: <The domain you want the server to run on>
 limit: <The rate limiter>
+FloodgatePrefix: <If your using floodGate your bedrock player prefix>
 AccessKey:
   enabled: <If you want it to require an access key>
   key: <The required access key if enabled>
@@ -129,13 +146,21 @@ AccessKey:
 
 ### Console Commands
 
-#### `ctxreload`
-- **Description**: Reloads the configuration file.
-- **Usage**: `ctxreload`
+#### `capi`
+- **Description**: Opens a help page with a list of available commands.
+- **Usage**: `capi`
 
-#### `capigenaccesskey`
+#### `capi reload`
+- **Description**: Reloads the configuration file.
+- **Usage**: `capi reload`
+
+#### `capi keygen`
 - **Description**: Generates a new access key for the API.
-- **Usage**: `capigenaccesskey`
+- **Usage**: `capi keygen`
+  
+#### `capi version`
+- **Description**: Checks the version of the plugin and if there are any updates.
+- **Usage**: `capi version`
 
 ### Player Commands
 
@@ -143,7 +168,6 @@ AccessKey:
 - **Description**: Checks when a specified player was last seen on the proxy and which server they were on.
 - **Permission**: `CrypticProxyAPI.lastseen.use`
 - **Usage**: `/lastseen <player>`
-
 
 ## Example Usage in Different Languages
 
@@ -217,7 +241,7 @@ if __name__ == '__main__':
 ```javascript
 const axios = require('axios');
 
-const ACCESS_KEY = "accesskey";
+const ACCESS_KEY = "2910294e-eee7-490e-9264-eb07fbd78519";
 const BASE_URL = "http://localhost:7000/";
 
 async function sendRequest(value, jsonKey) {
@@ -236,8 +260,4 @@ async function sendRequest(value, jsonKey) {
 
 sendRequest('', 'status');
 ```
-
-
-## How to Install/Setup
-
-**https://github.com/Madtrent/CrypticProxyAPI-Docs/blob/main/Install.md**
+```
