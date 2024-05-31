@@ -260,4 +260,6 @@ async function sendRequest(value, jsonKey) {
 
 sendRequest('', 'status');
 ```
-```
+## How to Install/Setup
+
+**https://github.com/Madtrent/CrypticProxyAPI-Docs/blob/main/Install.md**
