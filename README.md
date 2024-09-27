@@ -169,6 +169,12 @@ AccessKey:
 - **Permission**: `CrypticProxyAPI.lastseen.use`
 - **Usage**: `/lastseen <player>`
 
+#### `discordlink`
+- **Aliases**: dlink
+- **Description**: generates a discord link code
+- **Permission**: `CrypticProxyAPI.discordlink`
+- **Usage**: `/discordlink`
+
 ## Example Usage in Different Languages
 
 ### Java
