@@ -24,14 +24,18 @@ The CrypticProxyAPI is a RESTful API designed to manage and retrieve player data
 ```
 
 ### Player Data Endpoint
-`GET <domain>/player/<player>`
+`GET <domain>/player/<player_name>`
+`GET <domain>/uuid/<player_uuid>`
 - **Description**: Retrieves player data if available.
 - **Parameters**: 
-  - `player` (string): The player's UUID or username.
+  - `player/player_name` (string): The player's username.
+  - `uuid/player_name` (string): The player's uuid.
 - **Responses**:
   - **If the player has a data file**:
   ```json
   {
+    "DiscordId": "String",
+    "DiscordLinked": boolean,
     "LastLogout": long,
     "Uuid": "String",
     "JoinedServers": {
@@ -94,7 +98,7 @@ The CrypticProxyAPI is a RESTful API designed to manage and retrieve player data
 }
 ```
 
-### Specific Player Data in Proxy Server Endpoint
+### Specific Player Data in Proxy Server Endpoint (Removed)
 `GET <domain>/proxy/<server>/<uuidofplayer>`
 - **Description**: Retrieves specific player data from a given proxy server.
 - **Parameters**:
@@ -111,6 +115,21 @@ The CrypticProxyAPI is a RESTful API designed to manage and retrieve player data
 }
 ```
 
+### Discord link Endpoint
+`GET <domain>/discordlink/<uuidofplayer>`
+`POST <domain>/discordlink/<uuidofplayer>`
+- **Description**: Retrieves the player's discord info
+- **Requirements**: Discord Access Key
+- **Parameters**:
+  - `uuidofplayer` (string): The UUID of the player.
+- **Response**:
+```json
+{
+  "discord_linked": "Boolean",
+  "discord_link_code": "String",
+  "discord_id": "String",
+}
+```
 ## Errors
 
 ### Error Responses
@@ -140,6 +159,8 @@ FloodgatePrefix: <If your using floodGate your bedrock player prefix>
 AccessKey:
   enabled: <If you want it to require an access key>
   key: <The required access key if enabled>
+DiscordAccessKey:
+  key: <The required access key for the discord enpoint>
 ```
 
 ## Commands Overview
@@ -157,6 +178,10 @@ AccessKey:
 #### `capi keygen`
 - **Description**: Generates a new access key for the API.
 - **Usage**: `capi keygen`
+
+#### `capi discordkeygen`
+- **Description**: Generates a new discord access key for the API.
+- **Usage**: `capi discordkeygen`
   
 #### `capi version`
 - **Description**: Checks the version of the plugin and if there are any updates.
@@ -174,6 +199,15 @@ AccessKey:
 - **Description**: generates a discord link code
 - **Permission**: `CrypticProxyAPI.discordlink`
 - **Usage**: `/discordlink`
+
+## Header Usage / Access key
+### `General Access Key`
+- Header = `Access-Key`
+- Value = `Config Value`
+  
+### `Discord Access key`
+- Header = `Discord-Access-Key`
+- Value = `Config Value`
 
 ## Example Usage in Different Languages
 
