@@ -115,13 +115,17 @@ The CrypticProxyAPI is a RESTful API designed to manage and retrieve player data
 }
 ```
 
-### Discord link Endpoint
-`GET <domain>/discordlink/<uuidofplayer>`
-`POST <domain>/discordlink/<uuidofplayer>`
+### Discord link Endpoints
+`GET <domain>/discordlink/uuid/<uuidofplayer>`
+
+`GET <domain>/discordlink/linkcode/<playersLinkCode>`
+
+`POST <domain>/discordlink/uuid/<uuidofplayer>`
 - **Description**: Retrieves the player's discord info
 - **Requirements**: Discord Access Key
 - **Parameters**:
   - `uuidofplayer` (string): The UUID of the player.
+  - `playersLinkCode` (string): The link code of the player
 - **Response**:
 ```json
 {
@@ -129,6 +133,23 @@ The CrypticProxyAPI is a RESTful API designed to manage and retrieve player data
   "discord_link_code": "String",
   "discord_id": "String",
 }
+```
+
+`GET <domain>/discordlink/linkcodes`
+- **Description**: Retrieves all link codes.
+- **Requirements**: Discord Access Key
+- **Response**:
+```json
+[
+  {
+    "discordLinkCode": "String",
+    "uuid": "String"
+  },
+  {
+    "discordLinkCode": "String",
+    "uuid": "String"
+  }
+]
 ```
 ## Errors
 
